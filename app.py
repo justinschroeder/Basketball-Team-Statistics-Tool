@@ -17,6 +17,34 @@ Exceeds:
 """
 
 import constants
+import copy
 
-if __name__ == "__main__":
-    
+players = copy.deepcopy(constants.PLAYERS)
+teams = copy.deepcopy(constants.TEAMS)
+
+experienced = []
+not_experienced = []
+
+def clean_data(list):
+    for dict in list:
+        dict['guardians'] = dict['guardians'].split(' and ')
+        dict['height'] = int(dict['height'].split()[0])
+        if dict['experience'] == 'YES':
+            dict['experience'] = True
+            experienced.append(dict)
+        else:
+            dict['experience'] = False
+            not_experienced.append(dict)
+    return list
+
+def balance_teams():
+
+    return teams
+
+def menu():
+    return
+
+if __name__ == '__main__':
+    clean_data(players)
+    balance_teams()
+    print(teams[0])
