@@ -38,7 +38,9 @@ def clean_data(list):
     return list
 
 def balance_teams():
-
+    teams[0] = experienced[:3] + not_experienced[:3]
+    teams[1] = experienced[3:6] + not_experienced[3:6]
+    teams[2] = experienced[6:9] + not_experienced[6:9]
     return teams
 
 def menu():
@@ -47,4 +49,4 @@ def menu():
 if __name__ == '__main__':
     clean_data(players)
     balance_teams()
-    print(teams[0])
+    print(teams)
