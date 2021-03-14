@@ -20,7 +20,7 @@ import constants
 import copy
 
 players = copy.deepcopy(constants.PLAYERS)
-teams = copy.deepcopy(constants.TEAMS)
+teams_list = copy.deepcopy(constants.TEAMS)
 
 experienced = []
 not_experienced = []
@@ -37,10 +37,15 @@ def clean_data(list):
             not_experienced.append(dict)
     return list
 
+teams = []
 def balance_teams():
-    teams[0] = experienced[:3] + not_experienced[:3]
-    teams[1] = experienced[3:6] + not_experienced[3:6]
-    teams[2] = experienced[6:9] + not_experienced[6:9]
+    for team in teams_list:
+        team_dict = {}
+        team_dict['name'] = team
+        teams.append(team_dict)
+    teams[0]['players'] = experienced[:3] + not_experienced[:3]
+    teams[1]['players'] = experienced[3:6] + not_experienced[3:6]
+    teams[2]['players'] = experienced[6:9] + not_experienced[6:9]
     return teams
 
 def menu():
@@ -49,4 +54,3 @@ def menu():
 if __name__ == '__main__':
     clean_data(players)
     balance_teams()
-    print(teams)
