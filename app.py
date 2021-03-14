@@ -49,8 +49,29 @@ def balance_teams():
     return teams
 
 def menu():
+    header = '\nBASKETBALL TEAM STATS TOOL'
+    print(header)
+    print('-'*len(header))
+    while True:
+        print('\nMENU:\n')
+        print('1 - Display Team Stats\n2 - Quit\n')
+        try:
+            menu_input = int(input('Select an option >>   '))
+            if menu_input == 2:
+                print('Thank you. Exiting...')
+                break
+            elif menu_input == 1:
+                continue
+            else:
+                print('That is not a valid option. Please select 1 or 2.\n')
+                continue
+        except ValueError:
+            print('Please enter a valid option; 1 or 2.\n')
+            continue
+        break
     return
 
 if __name__ == '__main__':
     clean_data(players)
     balance_teams()
+    menu()
