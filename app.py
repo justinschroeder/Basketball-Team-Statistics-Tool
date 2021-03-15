@@ -1,21 +1,3 @@
-"""
-Meets Expectations:
-1. Create New Script called app.py - Done
-2. Use Dunder Main to prevent execution on import
-3. Import PLAYERS from constants.py
-4. Create clean_data function
-5. Create balance_teams function
-6. Ensure Console Readability
-7. Display Team stats
-
-Exceeds:
-1. Clean gaurdians in clean_data
-2. Balance by player exp in balance_teams
-3. Include additional stats
-4. Quit Menu Option
-
-"""
-
 import constants
 import copy
 
@@ -48,25 +30,75 @@ def balance_teams():
     teams[2]['players'] = experienced[6:9] + not_experienced[6:9]
     return teams
 
+def team_stats(team):
+    team_name = team['name']
+    total_players = len(team['players'])
+    team_players = []
+    team_guardians = []
+    total_exp = 0
+    total_not_exp = 0
+    team_height = 0
+    for player in team['players']:
+        team_players.append(player['name'])
+        team_guardians += player['guardians']
+        team_height += player['height']
+        if player['experience'] == True:
+            total_exp += 1
+        else:
+            total_not_exp += 1
+    avg_height = team_height / total_players
+    print(f'\nTeam {team_name} Stats')
+    print('-'*20)
+    print(f'Total Players: {total_players}')
+    print(f'Experienced Players: {total_exp}')
+    print(f'Inexperienced Players: {total_not_exp}')
+    print(f'Average Team Height: {avg_height} Inches\n')
+    print('Players on Team:')
+    print(', '.join(team_players))
+    print('\nGuardians:')
+    print(', '.join(team_guardians))
+    return
+
 def menu():
     header = '\nBASKETBALL TEAM STATS TOOL'
     print(header)
     print('-'*len(header))
     while True:
-        print('\nMENU:\n')
+        print('\nMAIN MENU:\n')
         print('1 - Display Team Stats\n2 - Quit\n')
         try:
             menu_input = int(input('Select an option >>   '))
             if menu_input == 2:
-                print('Thank you. Exiting...')
+                print('\nThank you for using the Basketball Team Stats Tool. Goodbye.')
                 break
             elif menu_input == 1:
+                while True:
+                    print('\nTEAMS:\n')
+                    for index, team in enumerate(teams):
+                        print(index+1, ' - ', team['name'])
+                    print('\n')
+                    try:
+                        team_input = int(input('Select a Team >>   '))
+                        if team_input <= 0:
+                            print('Oops! That is not a valid option. Please try again.')
+                            continue
+                        team_stats(teams[team_input-1])
+                        print('\n\n')
+                        input('Press ANY KEY to continue to MAIN MENU.')
+                        print('-'*50)
+                        break
+                    except ValueError:
+                        print('Oops! That is not a valid option. Please try again.')
+                        continue
+                    except IndexError:
+                        print('Oops! That is not a valid option. Please try again.')
+                        continue
                 continue
             else:
-                print('That is not a valid option. Please select 1 or 2.\n')
+                print('Oops! That is not a valid option. Please try again.\n')
                 continue
         except ValueError:
-            print('Please enter a valid option; 1 or 2.\n')
+            print('Oops! That is not a valid option. Please try again.\n')
             continue
         break
     return
