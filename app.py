@@ -3,9 +3,10 @@ import copy
 
 players = copy.deepcopy(constants.PLAYERS)
 teams_list = copy.deepcopy(constants.TEAMS)
-
+teams = []
 experienced = []
 not_experienced = []
+
 
 def clean_data(list):
     for dict in list:
@@ -19,7 +20,7 @@ def clean_data(list):
             not_experienced.append(dict)
     return list
 
-teams = []
+
 def balance_teams():
     for team in teams_list:
         team_dict = {}
@@ -29,6 +30,7 @@ def balance_teams():
     teams[1]['players'] = experienced[3:6] + not_experienced[3:6]
     teams[2]['players'] = experienced[6:9] + not_experienced[6:9]
     return teams
+
 
 def team_stats(team):
     team_name = team['name']
@@ -42,7 +44,7 @@ def team_stats(team):
         team_players.append(player['name'])
         team_guardians += player['guardians']
         team_height += player['height']
-        if player['experience'] == True:
+        if player['experience'] is True:
             total_exp += 1
         else:
             total_not_exp += 1
@@ -58,6 +60,7 @@ def team_stats(team):
     print('\nGuardians:')
     print(', '.join(team_guardians))
     return
+
 
 def menu():
     header = '\nBASKETBALL TEAM STATS TOOL'
